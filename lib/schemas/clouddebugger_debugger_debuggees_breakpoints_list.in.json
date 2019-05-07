@@ -1,0 +1,44 @@
+{
+    "type": "object",
+    "properties": {
+        "clientVersion": {
+            "type": "string"
+        },
+        "debuggeeId": {
+            "required": true,
+            "type": "string"
+        },
+        "includeAllUsers": {
+            "type": "boolean"
+        },
+        "includeInactive": {
+            "type": "boolean"
+        },
+        "stripResults": {
+            "type": "boolean"
+        },
+        "waitToken": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "action_value": {
+            "type": "string",
+            "enum": [
+                "CAPTURE",
+                "LOG"
+            ]
+        }
+    }
+}

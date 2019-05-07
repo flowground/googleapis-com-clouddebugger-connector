@@ -1,0 +1,485 @@
+{
+    "type": "object",
+    "properties": {
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Request to register a debuggee.",
+            "properties": {
+                "debuggee": {
+                    "description": "Debuggee information to register.\nThe fields `project`, `uniquifier`, `description` and `agent_version`\nof the debuggee must be set.",
+                    "properties": {
+                        "agentVersion": {
+                            "description": "Version ID of the agent.\nSchema: `domain/language-platform/vmajor.minor` (for example\n`google.com/java-gcp/v1.1`).",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Human readable description of the debuggee.\nIncluding a human-readable project name, environment name and version\ninformation is recommended.",
+                            "type": "string"
+                        },
+                        "extSourceContexts": {
+                            "description": "References to the locations and revisions of the source code used in the\ndeployed application.",
+                            "items": {
+                                "description": "An ExtendedSourceContext is a SourceContext combined with additional\ndetails describing the context.",
+                                "properties": {
+                                    "context": {
+                                        "description": "Any source context.",
+                                        "properties": {
+                                            "cloudRepo": {
+                                                "description": "A SourceContext referring to a revision in a cloud repo.",
+                                                "properties": {
+                                                    "aliasContext": {
+                                                        "description": "An alias, which may be a branch or tag.",
+                                                        "properties": {
+                                                            "kind": {
+                                                                "description": "The alias kind.",
+                                                                "enum": [
+                                                                    "ANY",
+                                                                    "FIXED",
+                                                                    "MOVABLE",
+                                                                    "OTHER"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "description": "The alias name.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "aliasName": {
+                                                        "description": "The name of an alias (branch, tag, etc.).",
+                                                        "type": "string"
+                                                    },
+                                                    "repoId": {
+                                                        "description": "The ID of the repo.",
+                                                        "properties": {
+                                                            "projectRepoId": {
+                                                                "description": "A combination of a project ID and a repo name.",
+                                                                "properties": {
+                                                                    "projectId": {
+                                                                        "description": "The ID of the project.",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "repoName": {
+                                                                        "description": "The name of the repo. Leave empty for the default repo.",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "uid": {
+                                                                "description": "A server-assigned, globally unique identifier.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "revisionId": {
+                                                        "description": "A revision ID.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "cloudWorkspace": {
+                                                "description": "A SourceContext referring to a snapshot in a cloud workspace.",
+                                                "properties": {
+                                                    "snapshotId": {
+                                                        "description": "The ID of the snapshot.\nAn empty snapshot_id refers to the most recent snapshot.",
+                                                        "type": "string"
+                                                    },
+                                                    "workspaceId": {
+                                                        "description": "The ID of the workspace.",
+                                                        "properties": {
+                                                            "name": {
+                                                                "description": "The unique name of the workspace within the repo.  This is the name\nchosen by the client in the Source API's CreateWorkspace method.",
+                                                                "type": "string"
+                                                            },
+                                                            "repoId": {
+                                                                "description": "The ID of the repo containing the workspace.",
+                                                                "properties": {
+                                                                    "projectRepoId": {
+                                                                        "description": "A combination of a project ID and a repo name.",
+                                                                        "properties": {
+                                                                            "projectId": {
+                                                                                "description": "The ID of the project.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "repoName": {
+                                                                                "description": "The name of the repo. Leave empty for the default repo.",
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    },
+                                                                    "uid": {
+                                                                        "description": "A server-assigned, globally unique identifier.",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "gerrit": {
+                                                "description": "A SourceContext referring to a Gerrit project.",
+                                                "properties": {
+                                                    "aliasContext": {
+                                                        "description": "An alias, which may be a branch or tag.",
+                                                        "properties": {
+                                                            "kind": {
+                                                                "description": "The alias kind.",
+                                                                "enum": [
+                                                                    "ANY",
+                                                                    "FIXED",
+                                                                    "MOVABLE",
+                                                                    "OTHER"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "description": "The alias name.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "aliasName": {
+                                                        "description": "The name of an alias (branch, tag, etc.).",
+                                                        "type": "string"
+                                                    },
+                                                    "gerritProject": {
+                                                        "description": "The full project name within the host. Projects may be nested, so\n\"project/subproject\" is a valid project name.\nThe \"repo name\" is hostURI/project.",
+                                                        "type": "string"
+                                                    },
+                                                    "hostUri": {
+                                                        "description": "The URI of a running Gerrit instance.",
+                                                        "type": "string"
+                                                    },
+                                                    "revisionId": {
+                                                        "description": "A revision (commit) ID.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "git": {
+                                                "description": "A SourceContext referring to any third party Git repo (e.g. GitHub).",
+                                                "properties": {
+                                                    "revisionId": {
+                                                        "description": "Git commit hash.\nrequired.",
+                                                        "type": "string"
+                                                    },
+                                                    "url": {
+                                                        "description": "Git repository URL.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "labels": {
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        },
+                                        "description": "Labels with user defined metadata.",
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "id": {
+                            "description": "Unique identifier for the debuggee generated by the controller service.",
+                            "type": "string"
+                        },
+                        "isDisabled": {
+                            "description": "If set to `true`, indicates that the agent should disable itself and\ndetach from the debuggee.",
+                            "type": "boolean"
+                        },
+                        "isInactive": {
+                            "description": "If set to `true`, indicates that Controller service does not detect any\nactivity from the debuggee agents and the application is possibly stopped.",
+                            "type": "boolean"
+                        },
+                        "labels": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "A set of custom debuggee properties, populated by the agent, to be\ndisplayed to the user.",
+                            "type": "object"
+                        },
+                        "project": {
+                            "description": "Project the debuggee is associated with.\nUse project number or id when registering a Google Cloud Platform project.",
+                            "type": "string"
+                        },
+                        "sourceContexts": {
+                            "description": "References to the locations and revisions of the source code used in the\ndeployed application.",
+                            "items": {
+                                "description": "A SourceContext is a reference to a tree of files. A SourceContext together\nwith a path point to a unique revision of a single file or directory.",
+                                "properties": {
+                                    "cloudRepo": {
+                                        "description": "A SourceContext referring to a revision in a cloud repo.",
+                                        "properties": {
+                                            "aliasContext": {
+                                                "description": "An alias, which may be a branch or tag.",
+                                                "properties": {
+                                                    "kind": {
+                                                        "description": "The alias kind.",
+                                                        "enum": [
+                                                            "ANY",
+                                                            "FIXED",
+                                                            "MOVABLE",
+                                                            "OTHER"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "description": "The alias name.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "aliasName": {
+                                                "description": "The name of an alias (branch, tag, etc.).",
+                                                "type": "string"
+                                            },
+                                            "repoId": {
+                                                "description": "The ID of the repo.",
+                                                "properties": {
+                                                    "projectRepoId": {
+                                                        "description": "A combination of a project ID and a repo name.",
+                                                        "properties": {
+                                                            "projectId": {
+                                                                "description": "The ID of the project.",
+                                                                "type": "string"
+                                                            },
+                                                            "repoName": {
+                                                                "description": "The name of the repo. Leave empty for the default repo.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "uid": {
+                                                        "description": "A server-assigned, globally unique identifier.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "revisionId": {
+                                                "description": "A revision ID.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "cloudWorkspace": {
+                                        "description": "A SourceContext referring to a snapshot in a cloud workspace.",
+                                        "properties": {
+                                            "snapshotId": {
+                                                "description": "The ID of the snapshot.\nAn empty snapshot_id refers to the most recent snapshot.",
+                                                "type": "string"
+                                            },
+                                            "workspaceId": {
+                                                "description": "The ID of the workspace.",
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "The unique name of the workspace within the repo.  This is the name\nchosen by the client in the Source API's CreateWorkspace method.",
+                                                        "type": "string"
+                                                    },
+                                                    "repoId": {
+                                                        "description": "The ID of the repo containing the workspace.",
+                                                        "properties": {
+                                                            "projectRepoId": {
+                                                                "description": "A combination of a project ID and a repo name.",
+                                                                "properties": {
+                                                                    "projectId": {
+                                                                        "description": "The ID of the project.",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "repoName": {
+                                                                        "description": "The name of the repo. Leave empty for the default repo.",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "uid": {
+                                                                "description": "A server-assigned, globally unique identifier.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "gerrit": {
+                                        "description": "A SourceContext referring to a Gerrit project.",
+                                        "properties": {
+                                            "aliasContext": {
+                                                "description": "An alias, which may be a branch or tag.",
+                                                "properties": {
+                                                    "kind": {
+                                                        "description": "The alias kind.",
+                                                        "enum": [
+                                                            "ANY",
+                                                            "FIXED",
+                                                            "MOVABLE",
+                                                            "OTHER"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "description": "The alias name.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "aliasName": {
+                                                "description": "The name of an alias (branch, tag, etc.).",
+                                                "type": "string"
+                                            },
+                                            "gerritProject": {
+                                                "description": "The full project name within the host. Projects may be nested, so\n\"project/subproject\" is a valid project name.\nThe \"repo name\" is hostURI/project.",
+                                                "type": "string"
+                                            },
+                                            "hostUri": {
+                                                "description": "The URI of a running Gerrit instance.",
+                                                "type": "string"
+                                            },
+                                            "revisionId": {
+                                                "description": "A revision (commit) ID.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "git": {
+                                        "description": "A SourceContext referring to any third party Git repo (e.g. GitHub).",
+                                        "properties": {
+                                            "revisionId": {
+                                                "description": "Git commit hash.\nrequired.",
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "description": "Git repository URL.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "status": {
+                            "description": "Human readable message to be displayed to the user about this debuggee.\nAbsence of this field indicates no status. The message can be either\ninformational or an error status.",
+                            "properties": {
+                                "description": {
+                                    "description": "Status message text.",
+                                    "properties": {
+                                        "format": {
+                                            "description": "Format template for the message. The `format` uses placeholders `$0`,\n`$1`, etc. to reference parameters. `$$` can be used to denote the `$`\ncharacter.\n\nExamples:\n\n*   `Failed to load '$0' which helps debug $1 the first time it\n    is loaded.  Again, $0 is very important.`\n*   `Please pay $$10 to use $0 instead of $1.`",
+                                            "type": "string"
+                                        },
+                                        "parameters": {
+                                            "description": "Optional parameters to be embedded into the message.",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "isError": {
+                                    "description": "Distinguishes errors from informational messages.",
+                                    "type": "boolean"
+                                },
+                                "refersTo": {
+                                    "description": "Reference to which the message applies.",
+                                    "enum": [
+                                        "UNSPECIFIED",
+                                        "BREAKPOINT_SOURCE_LOCATION",
+                                        "BREAKPOINT_CONDITION",
+                                        "BREAKPOINT_EXPRESSION",
+                                        "BREAKPOINT_AGE",
+                                        "VARIABLE_NAME",
+                                        "VARIABLE_VALUE"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "uniquifier": {
+                            "description": "Uniquifier to further distinguish the application.\nIt is possible that different applications might have identical values in\nthe debuggee message, thus, incorrectly identified as a single application\nby the Controller service. This field adds salt to further distinguish the\napplication. Agents should consider seeding this field with value that\nidentifies the code, binary, configuration and environment.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "__xgafv": {
+            "type": "string",
+            "enum": [
+                "1",
+                "2"
+            ]
+        }
+    }
+}

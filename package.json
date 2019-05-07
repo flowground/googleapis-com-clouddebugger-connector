@@ -1,0 +1,15 @@
+{
+    "name": "googleapis-com-clouddebugger-connector",
+    "version": "2.0.0",
+    "description": "Examines the call stack and variables of a running application without stopping or slowing it down.\n",
+    "main": "component.json",
+    "dependencies": {
+        "elasticio-node": "0.0.9",
+        "elasticio-sailor-nodejs": "^2.2.1",
+        "swagger-client": "^3.8.22"
+    },
+    "author": {
+        "name": "Deutsche Telekom AG"
+    },
+    "license": "Apache-2.0"
+}

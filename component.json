@@ -1,0 +1,186 @@
+{
+    "title": "Stackdriver Debugger",
+    "description": "Examines the call stack and variables of a running application without stopping or slowing it down.\n",
+    "docsUrl": "https://cloud.google.com/debugger",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/clouddebugger/v2/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://clouddebugger.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "clouddebugger_controller_debuggees_register": {
+            "main": "./lib/actions/clouddebugger_controller_debuggees_register.js",
+            "title": "Registers the debuggee with the controller service.\n\nAll agents attached to the same application must call this method with\nexactly the same request content to get back the same stable `debuggee_id`.\nAgents should call this method again whenever `google.rpc.Code.NOT_FOUND`\nis returned from any controller method.\n\nThis protocol allows the controller service to disable debuggees, recover\nfrom data loss, or change the `debuggee_id` format. Agents must handle\n`debuggee_id` value changing upon re-registration.",
+            "description": "Registers the debuggee with the controller service.\n\nAll agents attached to the same application must call this method with\nexactly the same request content to get back the same stable `debuggee_id`.\nAgents should call this method again whenever `google.rpc.Code.NOT_FOUND`\nis returned from any controller method.\n\nThis protocol allows the controller service to disable debuggees, recover\nfrom data loss, or change the `debuggee_id` format. Agents must handle\n`debuggee_id` value changing upon re-registration.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_controller_debuggees_register.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_controller_debuggees_breakpoints_list": {
+            "main": "./lib/actions/clouddebugger_controller_debuggees_breakpoints_list.js",
+            "title": "Returns the list of all active breakpoints for the debuggee.\n\nThe breakpoint specification (`location`, `condition`, and `expressions`\nfields) is semantically immutable, although the field values may\nchange. For example, an agent may update the location line number\nto reflect the actual line where the breakpoint was set, but this\ndoesn't change the breakpoint semantics.\n\nThis means that an agent does not need to check if a breakpoint has changed\nwhen it encounters the same breakpoint on a successive call.\nMoreover, an agent should remember the breakpoints that are completed\nuntil the controller removes them from the active list to avoid\nsetting those breakpoints again.",
+            "description": "Returns the list of all active breakpoints for the debuggee.\n\nThe breakpoint specification (`location`, `condition`, and `expressions`\nfields) is semantically immutable, although the field values may\nchange. For example, an agent may update the location line number\nto reflect the actual line where the breakpoint was set, but this\ndoesn't change the breakpoint semantics.\n\nThis means that an agent does not need to check if a breakpoint has changed\nwhen it encounters the same breakpoint on a successive call.\nMoreover, an agent should remember the breakpoints that are completed\nuntil the controller removes them from the active list to avoid\nsetting those breakpoints again.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_controller_debuggees_breakpoints_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_controller_debuggees_breakpoints_update": {
+            "main": "./lib/actions/clouddebugger_controller_debuggees_breakpoints_update.js",
+            "title": "Updates the breakpoint state or mutable fields.\nThe entire Breakpoint message must be sent back to the controller service.\n\nUpdates to active breakpoint fields are only allowed if the new value\ndoes not change the breakpoint specification. Updates to the `location`,\n`condition` and `expressions` fields should not alter the breakpoint\nsemantics. These may only make changes such as canonicalizing a value\nor snapping the location to the correct line of code.",
+            "description": "Updates the breakpoint state or mutable fields.\nThe entire Breakpoint message must be sent back to the controller service.\n\nUpdates to active breakpoint fields are only allowed if the new value\ndoes not change the breakpoint specification. Updates to the `location`,\n`condition` and `expressions` fields should not alter the breakpoint\nsemantics. These may only make changes such as canonicalizing a value\nor snapping the location to the correct line of code.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_controller_debuggees_breakpoints_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_debugger_debuggees_list": {
+            "main": "./lib/actions/clouddebugger_debugger_debuggees_list.js",
+            "title": "Lists all the debuggees that the user has access to.",
+            "description": "Lists all the debuggees that the user has access to.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_debugger_debuggees_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_debugger_debuggees_breakpoints_list": {
+            "main": "./lib/actions/clouddebugger_debugger_debuggees_breakpoints_list.js",
+            "title": "Lists all breakpoints for the debuggee.",
+            "description": "Lists all breakpoints for the debuggee.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_debugger_debuggees_breakpoints_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_debugger_debuggees_breakpoints_set": {
+            "main": "./lib/actions/clouddebugger_debugger_debuggees_breakpoints_set.js",
+            "title": "Sets the breakpoint to the debuggee.",
+            "description": "Sets the breakpoint to the debuggee.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_debugger_debuggees_breakpoints_set.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_debugger_debuggees_breakpoints_delete": {
+            "main": "./lib/actions/clouddebugger_debugger_debuggees_breakpoints_delete.js",
+            "title": "Deletes the breakpoint from the debuggee.",
+            "description": "Deletes the breakpoint from the debuggee.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_debugger_debuggees_breakpoints_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "clouddebugger_debugger_debuggees_breakpoints_get": {
+            "main": "./lib/actions/clouddebugger_debugger_debuggees_breakpoints_get.js",
+            "title": "Gets breakpoint information.",
+            "description": "Gets breakpoint information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/clouddebugger_debugger_debuggees_breakpoints_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
